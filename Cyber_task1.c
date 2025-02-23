@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <stdio.h> // Add this line
 
 bool is_prime(int num)
 {
@@ -31,11 +32,8 @@ int main()
 {
   int num;
   printf("Enter a number: ");
-  if (scanf("%d", &num) != 1)
-  {
-    fprintf(stderr, "Invalid input Please enter an integer.\n");
-    return EXIT_FAILURE;
-  }
+  scanf("%d", &num);
+
   if (is_prime(num))
   {
     printf("%d is a prime number.\n", num);
