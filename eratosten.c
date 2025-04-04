@@ -3,32 +3,41 @@
 #include <stdbool.h>
 #include <string.h>
 
-int main()
+bool* eratosten(int n)
 {
-    int x;
-    scanf("%d",&x);
+    bool* seive = (bool*)malloc(sizeof(bool) * (n + 1));
+    memset(seive,false,(n+1) * sizeof(bool));
 
-    bool* arr = (bool*) malloc((x+1) * sizeof(bool));
-
-    memset(arr,false,(x+1) * sizeof(bool));
-
-    for(int i = 2;i <= x;i++)
+    for(int i = 2; i <= n; i++)
     {
-        for(int j = i * 2; j <= x; j += i)
+        if(seive[i] == false)
         {
-            arr[j] = true;
+            for(int j = i+i;j <= n; j += i)
+            {
+                seive[j] = true;
+            }
         }
     }
+    return seive;
+}
 
-    for(int i = 2; i <= x;i++)
+void printNumbers(bool * seive, int n )
+{
+    for(int i = 2; i <= n ; i++)
     {
-        if(!arr[i])
+        if(!seive[i])
         {
             printf("%d ",i);
         }
     }
+}
 
-    free(arr);
+int main()
+{
+    int n;
+    scanf("%d",&n);
+
+    bool* seive = eratosten(n);
+    printNumbers(seive,n);
     return EXIT_SUCCESS;
-
 }

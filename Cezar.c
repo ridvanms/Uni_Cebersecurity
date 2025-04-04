@@ -4,43 +4,42 @@
 
 #define MAXN 1000
 
-char* cezarCipher(char* text,int key)
+char* cezarCipher(char* str,int key)
 {
-    int length = strlen(text);
+    int length = strlen(str);
+    char* cipher = (char*)malloc(sizeof(char) * (length+1));
 
-    char* cipher = (char*)malloc(sizeof(char)*(length+1));
-
-    for(int i = 0;i <= length;i++)
+    for(int i = 0;i < length; i++)
     {
-        if(text[i] >= 'a' && text[i] <= 'z')
+        if(str[i] >= 'a' && str[i] <= 'z')
         {
-            cipher[i]=((text[i] -'a' )+key)%26 + 'a';
+            cipher[i] = ((str[i] - 'a' )+key)%26 + 'a';
         }
-        else if(text[i] >= 'A' && text[i] <= 'Z')
+        else if(str[i] >= 'A' && str[i] <= 'Z')
         {
-            cipher[i] = ((text[i] - 'A' )+key)%26 + 'A';
+            cipher[i] = ((str[i] - 'A' ) + key)%26 + 'A';
         }
-        else if(text[i] >= '0' && text[i] <= '9')
+        else if(str[i] >= '0' && str[i] <= '9')
         {
-            cipher[i] = ((text[i] - '0')+key)%10 + '0';
+            cipher[i] = ((str[i] - '0' ) + key)%10 + '0';
         }
-        else 
-        {
-            cipher[i] = text[i];
+        else {
+            cipher[i] = str[i];
         }
     }
     return cipher;
 }
 
+
 int main()
 {
-    char text[MAXN];
-    fgets(text,MAXN,stdin);
+    char str[MAXN];
+    fgets(str,MAXN,stdin);
 
     int key;
-    scanf("%d",&key);
-    
-    char* cipher = cezarCipher(text,key);
+    scanf("%d",key);
+
+    char* cipher = cezarCipher(str,key);
     printf("%s",cipher);
 
     FILE* fp = fopen("cipher.txt","wb");
