@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <stdbool.h>
+#include <math.h>
 
 bool isPrime(int num)
 {
     bool prime = true;
     int end = sqrt(num);
-
-    for(int i = 2; i <= end; i++)
+    for(int i = 2; i<=end;i++)
     {
         if(num % i == 0)
         {
@@ -22,15 +21,15 @@ int main()
 {
     int num;
     scanf("%d",&num);
-    bool response = isPrime(num);
 
-    if(response)
+    bool res = isPrime(num);
+    if(res)
     {
-        printf("The number is prime.");
+        printf("The number is prime");
     }
     else
     {
-        printf("The number is not prime.");
+        printf("The number is not prime");
     }
     return EXIT_SUCCESS;
 }
