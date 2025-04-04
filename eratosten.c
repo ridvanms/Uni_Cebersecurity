@@ -3,16 +3,15 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool* eratosten(int n)
+bool* eratosten(int n )
 {
     bool* seive = (bool*)malloc(sizeof(bool) * (n + 1));
     memset(seive,false,(n+1) * sizeof(bool));
-
-    for(int i = 2; i <= n; i++)
+    for(int i = 2;i <= n; i++)
     {
         if(seive[i] == false)
         {
-            for(int j = i+i;j <= n; j += i)
+            for(int j = i + i ;j <= n; j+=i)
             {
                 seive[j] = true;
             }
@@ -21,9 +20,10 @@ bool* eratosten(int n)
     return seive;
 }
 
-void printNumbers(bool * seive, int n )
+
+void printNumbers(bool* seive,int n)
 {
-    for(int i = 2; i <= n ; i++)
+    for(int i = 2;i <= n;i++)
     {
         if(!seive[i])
         {
