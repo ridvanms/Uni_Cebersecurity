@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int NOD(int a, int b)
+int NOD(int a,int b)
 {
     while(a != b)
     {
@@ -9,17 +9,14 @@ int NOD(int a, int b)
         {
             a = a-b;
         }
-        else
-        {
+        else{
             b = b-a;
         }
     }
     return a;
 }
 
-
-int main()
-{
+int main(){
     int a = 0,b=0;
     printf("Insert a: ");
     scanf("%d",&a);
@@ -27,7 +24,8 @@ int main()
     scanf("%d",&b);
 
     int result = NOD(a,b);
-    printf("The NOD of %d and %d = %d",a,b,result);
+    printf("THE NOD of %d and %d is: %d",a,b,result);
 
     return EXIT_SUCCESS;
+    
 }
