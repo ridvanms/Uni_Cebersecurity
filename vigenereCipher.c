@@ -1,75 +1,70 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-#define MAX_LENGTH 1000
-
-char* vigenereEncript(char* plaintext,char* key)
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<ctype.h>
+#define MAXN 1000
+char * vigenere_encript(char* plaintext,char* key)
 {
-    int textLength = strlen(plaintext);
-    int keyLength = strlen(key);
-    char* cipherText=(char*)malloc(sizeof(char)*textLength+1);
-    memset(cipherText,'\0',sizeof(char)*textLength+1);
-    for(int i =0;i<textLength;i++)
+    int text_length=strlen(plaintext);
+    int key_length=strlen(key);
+    char* cipher=(char*)malloc(sizeof(char)*text_length+1);
+    memset(cipher,'\0',sizeof(char)*text_length+1);
+    for(int i=0;i<text_length;i++)
     {
-        int shift=tolower(key[i%keyLength]) - 'a';
+        int shift=tolower(key[i%key_length])-'a';
         if(isalpha(plaintext[i]))
         {
-            if(islower(plaintext[i]))
-            {
-                cipherText[i] = 'a' + (plaintext[i] -'a' + shift)% 26;
-            }
-            else
-            {
-                cipherText[i] = 'A' + (plaintext[i] - 'A' +shift) % 26;
-            }
+              if(islower(plaintext[i]))
+              {
+                cipher[i]='a'+(plaintext[i]-'a'+shift)%26;
+              }
+              else
+              {
+                cipher[i]='A'+(plaintext[i]-'A'+shift)%26;
+              }
         }
         else
         {
-            cipherText[i] = plaintext[i];
+            cipher[i]=plaintext[i];
         }
     }
-    cipherText[textLength] = '\0';
-    return cipherText;
+    cipher[text_length]='\0';
+    return cipher;
 }
-
-int readCipher(char* fname,char* cipher)
+int read_cipher(char * fname,char * cipher)
 {
-    FILE* file = fopen(fname, "r");
-    if(file == NULL)
+    FILE *p = fopen(fname,"r");
+    if(p==NULL)
     {
-        printf("Error opening file \n");
+        printf("Error opening the file");
         return EXIT_FAILURE;
     }
-    if(fgets(cipher,MAX_LENGTH,file) == NULL)
+    if(fgets(cipher,MAXN,p)==NULL)
     {
-        printf("Error reading file \n");
+        printf("Error reading the file");
         return EXIT_FAILURE;
     }
-    fclose(file);
+    fclose(p);
     return EXIT_SUCCESS;
 }
-
-void writeFile(char* fname,char* text)
+void write_file(char* fname,char*text)
 {
-    FILE* fp = fopen(fname, "wb");
-    fprintf(fp,"%s",text);
-    fclose(fp);
+ FILE *fp=fopen(fname,"wb");
+ fprintf(fp,"%s",text);
+ fclose(fp);
 }
-
 int main()
 {
-    char textFile[MAX_LENGTH];
-    scanf("%s",textFile);
-    char keyFile[MAX_LENGTH];
-    scanf("%s",keyFile);
-    char text[MAX_LENGTH];
-    readCipher(textFile,text);
-    char key[MAX_LENGTH];
-    readCipher(keyFile,key);
-    char* cipherText = vigenereEncript(text,key);
-    writeFile("cipherText.txt",cipherText);
-    free(cipherText);
+    char text_file[MAXN];
+    scanf("%s",text_file);
+    char key_file[MAXN];
+    scanf("%s",key_file);
+    char text[MAXN];
+    read_cipher(text_file,text);
+    char key[MAXN];
+    read_cipher(key_file,key);
+    char * cipher = vigenere_encript(text,key);
+    write_file("cipher_vig.txt",cipher);
+    free(cipher);
     return EXIT_SUCCESS;
 }
