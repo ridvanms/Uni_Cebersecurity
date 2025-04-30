@@ -3,41 +3,34 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool* eratosten(int n )
-{
+bool* eratosten(int n){
     bool* seive = (bool*)malloc(sizeof(bool) * (n + 1));
-    memset(seive,false,(n+1) * sizeof(bool));
-    for(int i = 2;i <= n; i++)
-    {
-        if(seive[i] == false)
-        {
-            for(int j = i + i ;j <= n; j+=i)
-            {
-                seive[j] = true;
+    memset(seive,false,sizeof(bool) * (n+1));
+
+    for(int i = 2; i <= n; i++){
+        if(seive[i] == false){
+            for(int j = i+i; j <= n;j += i){
+                seive[j]=true;
             }
         }
     }
     return seive;
 }
 
-
-void printNumbers(bool* seive,int n)
-{
-    for(int i = 2;i <= n;i++)
-    {
-        if(!seive[i])
-        {
+void printNumbers(bool* seive,int n){
+    printf("prime numbers are: ");
+    for(int i = 2;i<=n;i++){
+        if(!seive[i]){
             printf("%d ",i);
         }
     }
 }
 
-int main()
-{
-    int n;
-    scanf("%d",&n);
-
-    bool* seive = eratosten(n);
-    printNumbers(seive,n);
+int main(){
+    int number= 0;
+    printf("You need to add a number: ");
+    scanf("%d",&number);
+    bool* seive = eratosten(number);
+    printNumbers(seive,number);
     return EXIT_SUCCESS;
 }
